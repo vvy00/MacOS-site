@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MacOS Site</title>
+  <meta
+    name="description"
+    content="A macOS-inspired search desktop with a passwordless login gate, Google search, Spotify playback, and switchable backgrounds."
+  >
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="sunrise">
+  <div class="wallpaper wallpaper--sunrise"></div>
+  <div class="wallpaper wallpaper--aurora"></div>
+  <div class="wallpaper wallpaper--midnight"></div>
+  <div class="wallpaper wallpaper--studio"></div>
+  <div class="wallpaper wallpaper--forest"></div>
+  <div class="wallpaper wallpaper--coast"></div>
+  <div class="desktop-noise"></div>
+
+  <div class="login-overlay" id="loginOverlay" aria-hidden="false">
+    <section class="login-card">
+      <div class="login-card__top">
+        <div class="login-avatar" aria-hidden="true">M</div>
+        <p class="login-label">MacOS Site</p>
+        <h1>Click to enter</h1>
+        <p class="login-copy">
+          Open a macOS-style desktop with a real Google search bar, a built-in Spotify player, and
+          a background picker. No password or username needed.
+        </p>
+      </div>
+      <button class="button button--primary button--enter" id="enterButton" type="button">
+        Log in
+      </button>
+    </section>
+  </div>
+
+  <header class="menu-bar">
+    <div class="menu-bar__left">
+      <span class="apple-mark" aria-hidden="true">*</span>
+      <span class="menu-bar__title">MacOS Site</span>
+      <nav class="menu-links" aria-label="Sections">
+        <button class="menu-link is-active" data-panel-target="search" type="button">Search</button>
+        <button class="menu-link" data-panel-target="music" type="button">Spotify</button>
+        <button class="menu-link" data-panel-target="themes" type="button">Backgrounds</button>
+      </nav>
+    </div>
+    <div class="menu-bar__right">
+      <span class="status-pill">Guest session</span>
+    </div>
+  </header>
+
+  <main class="desktop" id="appShell" aria-hidden="true">
+    <section class="window app-window" id="appWindow">
+      <div class="window__toolbar">
+        <div class="traffic-lights" aria-hidden="true">
+          <button class="traffic traffic--red" id="closeWindowButton" type="button" aria-label="Close"></button>
+          <button class="traffic traffic--yellow" id="minimizeWindowButton" type="button" aria-label="Minimize"></button>
+          <button class="traffic traffic--green" id="expandWindowButton" type="button" aria-label="Expand"></button>
+        </div>
+        <div class="window__title">Desktop Hub</div>
+      </div>
+
+      <div class="window__content">
+        <aside class="sidebar">
+          <div class="sidebar__group">
+            <p class="sidebar__label">Shortcuts</p>
+            <button class="sidebar__item is-active" data-panel-target="search" type="button">Google Search</button>
+            <button class="sidebar__item" data-panel-target="music" type="button">Spotify Player</button>
+            <button class="sidebar__item" data-panel-target="themes" type="button">Backgrounds</button>
+          </div>
+          <div class="sidebar__group">
+            <p class="sidebar__label">Current look</p>
+            <p class="sidebar__note" id="themeLabel">Sunrise Blend</p>
+          </div>
+        </aside>
+
+        <div class="content-area">
+          <section class="panel is-visible" id="search">
+            <div class="hero">
+              <div class="hero__copy">
+                <p class="eyebrow">Search the real web</p>
+                <h2>Use Google from the desktop.</h2>
+                <p class="lead">
+                  Type anything and it opens a real Google search in a new tab. The quick buttons
+                  below fill the bar for common jumps.
+                </p>
+              </div>
+              <div class="hero__panel">
+                <p class="hero__panel-label">Quick fills</p>
+                <div class="prompt-grid">
+                  <button class="prompt-chip" type="button" data-query="weather near me">weather near me</button>
+                  <button class="prompt-chip" type="button" data-query="latest movie trailers">latest movie trailers</button>
+                  <button class="prompt-chip" type="button" data-query="spotify top 50 global">spotify top 50 global</button>
+                  <button class="prompt-chip" type="button" data-query="cool desktop wallpapers">cool desktop wallpapers</button>
+                </div>
+              </div>
+            </div>
+
+            <form class="search-bar" action="https://www.google.com/search" method="get" target="_blank">
+              <label class="search-bar__field" for="searchInput">
+                <span aria-hidden="true">S</span>
+                <input
+                  id="searchInput"
+                  name="q"
+                  type="search"
+                  placeholder="Search Google..."
+                  autocomplete="off"
+                >
+              </label>
+              <button class="button button--primary" type="submit">Google</button>
+            </form>
+
+            <div class="shortcut-grid">
+              <a class="shortcut-card" href="https://www.google.com" target="_blank" rel="noreferrer">
+                <strong>Google</strong>
+                <p>Main search page</p>
+              </a>
+              <a class="shortcut-card" href="https://images.google.com" target="_blank" rel="noreferrer">
+                <strong>Images</strong>
+                <p>Image search</p>
+              </a>
+              <a class="shortcut-card" href="https://news.google.com" target="_blank" rel="noreferrer">
+                <strong>News</strong>
+                <p>Current stories</p>
+              </a>
+              <button class="shortcut-card shortcut-card--button" id="openSpotifyPanel" type="button">
+                <strong>Spotify</strong>
+                <p>Open the built-in player</p>
+              </button>
+            </div>
+          </section>
+
+          <section class="panel" id="music">
+            <div class="section-heading">
+              <p class="eyebrow">Spotify</p>
+              <h2>Spotify player.</h2>
+            </div>
+            <div class="music-stack">
+              <article class="music-card music-card--player">
+                <iframe
+                  id="spotifyFrame"
+                  class="music-frame music-frame--large"
+                  src="https://open.spotify.com/embed/playlist/37i9dQZEVXbNG2KDcFcKOF?utm_source=generator"
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                  loading="lazy"
+                ></iframe>
+              </article>
+            </div>
+          </section>
+
+          <section class="panel" id="themes">
+            <div class="section-heading">
+              <p class="eyebrow">Backgrounds</p>
+              <h2>Pick the desktop mood.</h2>
+            </div>
+            <div class="theme-grid">
+              <button class="theme-card is-selected" data-theme="sunrise" data-theme-name="Sunrise Blend" type="button">
+                <span class="theme-card__preview theme-card__preview--sunrise"></span>
+                <strong>Sunrise Blend</strong>
+              </button>
+              <button class="theme-card" data-theme="aurora" data-theme-name="Aurora Glass" type="button">
+                <span class="theme-card__preview theme-card__preview--aurora"></span>
+                <strong>Aurora Glass</strong>
+              </button>
+              <button class="theme-card" data-theme="midnight" data-theme-name="Midnight Drift" type="button">
+                <span class="theme-card__preview theme-card__preview--midnight"></span>
+                <strong>Midnight Drift</strong>
+              </button>
+              <button class="theme-card" data-theme="studio" data-theme-name="Studio Sky" type="button">
+                <span class="theme-card__preview theme-card__preview--studio"></span>
+                <strong>Studio Sky</strong>
+              </button>
+              <button class="theme-card" data-theme="forest" data-theme-name="Forest Mist" type="button">
+                <span class="theme-card__preview theme-card__preview--forest"></span>
+                <strong>Forest Mist</strong>
+              </button>
+              <button class="theme-card" data-theme="coast" data-theme-name="Coastline" type="button">
+                <span class="theme-card__preview theme-card__preview--coast"></span>
+                <strong>Coastline</strong>
+              </button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <nav class="dock" aria-label="Dock">
+      <button class="dock__item is-active" data-panel-target="search" type="button" aria-label="Safari and Google search">
+        <span class="dock-icon dock-icon--safari">
+          <span class="dock-icon__compass"></span>
+        </span>
+        <small>Safari</small>
+      </button>
+      <button class="dock__item" data-panel-target="music" type="button" aria-label="Spotify">
+        <span class="dock-icon dock-icon--spotify">
+          <span class="dock-icon__spotify-line dock-icon__spotify-line--one"></span>
+          <span class="dock-icon__spotify-line dock-icon__spotify-line--two"></span>
+          <span class="dock-icon__spotify-line dock-icon__spotify-line--three"></span>
+        </span>
+        <small>Spotify</small>
+      </button>
+      <button class="dock__item" data-panel-target="themes" type="button" aria-label="Wallpapers">
+        <span class="dock-icon dock-icon--wallpaper">
+          <span class="dock-icon__sun"></span>
+          <span class="dock-icon__mountain dock-icon__mountain--back"></span>
+          <span class="dock-icon__mountain dock-icon__mountain--front"></span>
+        </span>
+        <small>Wallpapers</small>
+      </button>
+      <button class="dock__item" id="restoreWindowButton" type="button" aria-label="Restore window">
+        <span class="dock-icon dock-icon--finder">
+          <span class="dock-icon__finder-split"></span>
+          <span class="dock-icon__finder-eye dock-icon__finder-eye--left"></span>
+          <span class="dock-icon__finder-eye dock-icon__finder-eye--right"></span>
+          <span class="dock-icon__finder-smile"></span>
+        </span>
+        <small>Window</small>
+      </button>
+    </nav>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
