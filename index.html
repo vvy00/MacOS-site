@@ -17,19 +17,25 @@
   <div class="wallpaper wallpaper--studio"></div>
   <div class="wallpaper wallpaper--forest"></div>
   <div class="wallpaper wallpaper--coast"></div>
+  <div class="wallpaper wallpaper--dune"></div>
+  <div class="wallpaper wallpaper--twilight"></div>
   <div class="desktop-noise"></div>
 
   <div class="login-overlay" id="loginOverlay" aria-hidden="false">
     <section class="login-card">
       <div class="login-card__top">
+        <div class="lock-meta">
+          <p class="lock-meta__time" id="lockTime">9:41</p>
+          <p class="lock-meta__date" id="lockDate">Monday, May 4</p>
+        </div>
         <div class="login-avatar" aria-hidden="true">M</div>
         <p class="login-label">MacOS Site</p>
-        <h1>Click to enter</h1>
         <p class="login-copy">
-          Open a macOS-style desktop with a real Google search bar, a built-in Spotify player, and
+          Open a macOS-style desktop with a Google search bar, a built-in Spotify player, and
           a background picker. No password or username needed.
         </p>
       </div>
+      <p class="login-arrow-hint" aria-hidden="true">↓</p>
       <button class="button button--primary button--enter" id="enterButton" type="button">
         Log in
       </button>
@@ -43,10 +49,13 @@
       <nav class="menu-links" aria-label="Sections">
         <button class="menu-link is-active" data-panel-target="search" type="button">Search</button>
         <button class="menu-link" data-panel-target="music" type="button">Spotify</button>
+        <button class="menu-link" data-panel-target="calendar" type="button">Calendar</button>
         <button class="menu-link" data-panel-target="themes" type="button">Backgrounds</button>
       </nav>
     </div>
     <div class="menu-bar__right">
+      <button class="status-pill status-pill--button" id="spotlightButton" type="button">Spotlight</button>
+      <span class="status-pill" id="clockDisplay">9:41 PM</span>
       <span class="status-pill">Guest session</span>
     </div>
   </header>
@@ -68,6 +77,7 @@
             <p class="sidebar__label">Shortcuts</p>
             <button class="sidebar__item is-active" data-panel-target="search" type="button">Google Search</button>
             <button class="sidebar__item" data-panel-target="music" type="button">Spotify Player</button>
+            <button class="sidebar__item" data-panel-target="calendar" type="button">Calendar</button>
             <button class="sidebar__item" data-panel-target="themes" type="button">Backgrounds</button>
           </div>
           <div class="sidebar__group">
@@ -150,6 +160,30 @@
             </div>
           </section>
 
+          <section class="panel" id="calendar">
+            <div class="section-heading">
+              <p class="eyebrow">Calendar</p>
+              <h2>Your monthly view.</h2>
+            </div>
+            <div class="calendar-container">
+              <div class="calendar-header">
+                <button class="calendar-nav" id="prevMonthButton" type="button" aria-label="Previous month">←</button>
+                <h3 class="calendar-title" id="calendarTitle">May 2026</h3>
+                <button class="calendar-nav" id="nextMonthButton" type="button" aria-label="Next month">→</button>
+              </div>
+              <div class="calendar-weekdays">
+                <div class="calendar-weekday">Sun</div>
+                <div class="calendar-weekday">Mon</div>
+                <div class="calendar-weekday">Tue</div>
+                <div class="calendar-weekday">Wed</div>
+                <div class="calendar-weekday">Thu</div>
+                <div class="calendar-weekday">Fri</div>
+                <div class="calendar-weekday">Sat</div>
+              </div>
+              <div class="calendar-grid" id="calendarGrid"></div>
+            </div>
+          </section>
+
           <section class="panel" id="themes">
             <div class="section-heading">
               <p class="eyebrow">Backgrounds</p>
@@ -180,6 +214,14 @@
                 <span class="theme-card__preview theme-card__preview--coast"></span>
                 <strong>Coastline</strong>
               </button>
+              <button class="theme-card" data-theme="dune" data-theme-name="Petal Bloom" type="button">
+                <span class="theme-card__preview theme-card__preview--dune"></span>
+                <strong>Petal Bloom</strong>
+              </button>
+              <button class="theme-card" data-theme="twilight" data-theme-name="Twilight Bloom" type="button">
+                <span class="theme-card__preview theme-card__preview--twilight"></span>
+                <strong>Twilight Bloom</strong>
+              </button>
             </div>
           </section>
         </div>
@@ -201,6 +243,10 @@
         </span>
         <small>Spotify</small>
       </button>
+      <button class="dock__item" data-panel-target="calendar" type="button" aria-label="Calendar">
+        <span class="dock-icon dock-icon--calendar"></span>
+        <small>Calendar</small>
+      </button>
       <button class="dock__item" data-panel-target="themes" type="button" aria-label="Wallpapers">
         <span class="dock-icon dock-icon--wallpaper">
           <span class="dock-icon__sun"></span>
@@ -220,6 +266,21 @@
       </button>
     </nav>
   </main>
+
+  <div class="spotlight-overlay" id="spotlightOverlay" aria-hidden="true">
+    <div class="spotlight-box">
+      <div class="spotlight-box__bar">
+        <span class="spotlight-box__icon">S</span>
+        <input id="spotlightInput" type="search" placeholder="Search Google or jump to a section..." autocomplete="off">
+      </div>
+      <div class="spotlight-actions">
+        <button class="prompt-chip" type="button" data-spotlight-target="search">Open Search</button>
+        <button class="prompt-chip" type="button" data-spotlight-target="music">Open Spotify</button>
+        <button class="prompt-chip" type="button" data-spotlight-target="calendar">Open Calendar</button>
+        <button class="prompt-chip" type="button" data-spotlight-target="themes">Open Backgrounds</button>
+      </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
