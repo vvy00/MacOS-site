@@ -3,6 +3,10 @@ const enterButton = document.getElementById("enterButton");
 const appShell = document.getElementById("appShell");
 const searchInput = document.getElementById("searchInput");
 const themeLabel = document.getElementById("themeLabel");
+const customWallpaper = document.getElementById("customWallpaper");
+const backgroundUploadInput = document.getElementById("backgroundUploadInput");
+const uploadBackgroundButton = document.getElementById("uploadBackgroundButton");
+const clearBackgroundButton = document.getElementById("clearBackgroundButton");
 const spotifyFrame = document.getElementById("spotifyFrame");
 const openSpotifyPanel = document.getElementById("openSpotifyPanel");
 const appWindow = document.getElementById("appWindow");
@@ -30,6 +34,7 @@ const spotlightTargets = document.querySelectorAll("[data-spotlight-target]");
 
 const DEFAULT_SPOTIFY =
   "https://open.spotify.com/embed/playlist/37i9dQZEVXbNG2KDcFcKOF?utm_source=generator";
+const CUSTOM_BACKGROUND_STORAGE_KEY = "macos-site-custom-background";
 
 let dragState = null;
 let currentCalendarDate = new Date();
@@ -84,6 +89,28 @@ function closeSpotlight() {
 function loadSavedSpotify() {
   const savedSpotify = localStorage.getItem("macos-site-spotify-embed");
   spotifyFrame.src = savedSpotify || DEFAULT_SPOTIFY;
+}
+
+function setCustomBackground(imageData) {
+  customWallpaper.style.backgroundImage = `url("${imageData}")`;
+  document.body.classList.add("has-custom-background");
+  themeLabel.textContent = "Custom Wallpaper";
+}
+
+function clearCustomBackground() {
+  customWallpaper.style.backgroundImage = "";
+  document.body.classList.remove("has-custom-background");
+  localStorage.removeItem(CUSTOM_BACKGROUND_STORAGE_KEY);
+  const selectedTheme = document.querySelector(".theme-card.is-selected");
+  themeLabel.textContent = selectedTheme?.dataset.themeName || "Sunrise Blend";
+}
+
+function loadSavedCustomBackground() {
+  const savedBackground = localStorage.getItem(CUSTOM_BACKGROUND_STORAGE_KEY);
+
+  if (savedBackground) {
+    setCustomBackground(savedBackground);
+  }
 }
 
 function startDrag(event) {
@@ -265,11 +292,42 @@ document.addEventListener("keydown", (event) => {
 
 themeButtons.forEach((button) => {
   button.addEventListener("click", () => {
+    clearCustomBackground();
     document.body.dataset.theme = button.dataset.theme;
     themeLabel.textContent = button.dataset.themeName;
     themeButtons.forEach((item) => item.classList.remove("is-selected"));
     button.classList.add("is-selected");
   });
+});
+
+uploadBackgroundButton.addEventListener("click", () => {
+  backgroundUploadInput.click();
+});
+
+backgroundUploadInput.addEventListener("change", () => {
+  const [file] = backgroundUploadInput.files || [];
+
+  if (!file || !file.type.startsWith("image/")) {
+    backgroundUploadInput.value = "";
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.addEventListener("load", () => {
+    const result = reader.result;
+
+    if (typeof result === "string") {
+      localStorage.setItem(CUSTOM_BACKGROUND_STORAGE_KEY, result);
+      setCustomBackground(result);
+    }
+  });
+
+  reader.readAsDataURL(file);
+});
+
+clearBackgroundButton.addEventListener("click", () => {
+  clearCustomBackground();
+  backgroundUploadInput.value = "";
 });
 
 openSpotifyPanel.addEventListener("click", () => {
@@ -305,5 +363,6 @@ document.addEventListener("mouseup", stopDrag);
 
 updateClock();
 loadSavedSpotify();
+loadSavedCustomBackground();
 generateCalendar(currentCalendarDate);
 setInterval(updateClock, 30000);

@@ -47,6 +47,13 @@ a {
   transition: opacity 260ms ease;
 }
 
+.wallpaper--custom {
+  background-color: #0f1724;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .wallpaper--sunrise {
   background:
     radial-gradient(circle at 18% 18%, rgba(255, 246, 219, 0.75), transparent 24%),
@@ -111,6 +118,10 @@ body[data-theme="forest"] .wallpaper--forest,
 body[data-theme="coast"] .wallpaper--coast,
 body[data-theme="dune"] .wallpaper--dune,
 body[data-theme="twilight"] .wallpaper--twilight {
+  opacity: 1;
+}
+
+body.has-custom-background .wallpaper--custom {
   opacity: 1;
 }
 
@@ -1200,8 +1211,47 @@ body[data-theme="forest"] .music-frame--large {
 }
 
 #themes .upload-card {
-  margin-top: 0.8rem;
-  flex-shrink: 0;
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 0.8rem;
+  padding: 0.95rem;
+  border-radius: 18px;
+  border: 2px dashed rgba(0, 0, 0, 0.16);
+  background: rgba(255, 252, 248, 0.7);
+}
+
+#themes .upload-card__copy p {
+  margin: 0.3rem 0 0;
+  font-size: 0.86rem;
+}
+
+#themes .upload-card__copy strong {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.88rem;
+}
+
+#themes .upload-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+#themes .upload-card__secondary {
+  background: rgba(33, 77, 125, 0.08);
+  color: #1c3550;
+}
+
+#themes .upload-card__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 #themes .theme-card {

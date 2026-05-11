@@ -19,6 +19,7 @@
   <div class="wallpaper wallpaper--coast"></div>
   <div class="wallpaper wallpaper--dune"></div>
   <div class="wallpaper wallpaper--twilight"></div>
+  <div class="wallpaper wallpaper--custom" id="customWallpaper"></div>
   <div class="desktop-noise"></div>
 
   <div class="login-overlay" id="loginOverlay" aria-hidden="false">
@@ -190,6 +191,18 @@
               <h2>Pick the desktop mood.</h2>
             </div>
             <div class="theme-grid">
+              <div class="upload-card">
+                <div class="upload-card__copy">
+                  <p class="eyebrow">Custom</p>
+                  <strong>Upload a wallpaper</strong>
+                  <p>Use any image from your device as the desktop background.</p>
+                </div>
+                <div class="upload-card__actions">
+                  <button class="button button--primary" id="uploadBackgroundButton" type="button">Upload image</button>
+                  <button class="button upload-card__secondary" id="clearBackgroundButton" type="button">Use theme</button>
+                </div>
+                <input class="upload-card__input" id="backgroundUploadInput" type="file" accept="image/*">
+              </div>
               <button class="theme-card is-selected" data-theme="sunrise" data-theme-name="Sunrise Blend" type="button">
                 <span class="theme-card__preview theme-card__preview--sunrise"></span>
                 <strong>Sunrise Blend</strong>
