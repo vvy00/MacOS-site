@@ -33,7 +33,7 @@ Features included:
   - Choose between: Top 50 Global or Top 50 USA
 - Calendar
   - Dynamic monthly calendar
-  - Left & Right arrows to navigate (<>)
+  - Left & Right arrows to navigate (<- ->)
   - Shows current day
 - Backgrounds
   - Themes
