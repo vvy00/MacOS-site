@@ -8,6 +8,7 @@ const backgroundUploadInput = document.getElementById("backgroundUploadInput");
 const uploadBackgroundButton = document.getElementById("uploadBackgroundButton");
 const clearBackgroundButton = document.getElementById("clearBackgroundButton");
 const spotifyFrame = document.getElementById("spotifyFrame");
+const spotifyToggleButton = document.getElementById("spotifyToggleButton");
 const openSpotifyPanel = document.getElementById("openSpotifyPanel");
 const appWindow = document.getElementById("appWindow");
 const windowToolbar = document.querySelector(".window__toolbar");
@@ -32,8 +33,11 @@ const promptButtons = document.querySelectorAll(".prompt-chip");
 const themeButtons = document.querySelectorAll(".theme-card");
 const spotlightTargets = document.querySelectorAll("[data-spotlight-target]");
 
-const DEFAULT_SPOTIFY =
+const DEFAULT_SPOTIFY_GLOBAL =
   "https://open.spotify.com/embed/playlist/37i9dQZEVXbNG2KDcFcKOF?utm_source=generator";
+const DEFAULT_SPOTIFY_USA =
+  "https://open.spotify.com/embed/playlist/37i9dQZEVXbLRQDuF5jeBp?utm_source=generator";
+const SPOTIFY_REGION_KEY = "macos-site-spotify-region";
 const CUSTOM_BACKGROUND_STORAGE_KEY = "macos-site-custom-background";
 
 let dragState = null;
@@ -87,8 +91,33 @@ function closeSpotlight() {
 }
 
 function loadSavedSpotify() {
-  const savedSpotify = localStorage.getItem("macos-site-spotify-embed");
-  spotifyFrame.src = savedSpotify || DEFAULT_SPOTIFY;
+  const savedEmbed = localStorage.getItem("macos-site-spotify-embed");
+  const savedRegion = localStorage.getItem(SPOTIFY_REGION_KEY) || "global";
+
+  if (savedEmbed) {
+    spotifyFrame.src = savedEmbed;
+  } else {
+    spotifyFrame.src = savedRegion === "usa" ? DEFAULT_SPOTIFY_USA : DEFAULT_SPOTIFY_GLOBAL;
+  }
+
+  updateSpotifyToggleUI(savedRegion);
+}
+
+function setSpotifyPlaylist(url, region) {
+  spotifyFrame.src = url;
+  localStorage.setItem("macos-site-spotify-embed", url);
+  localStorage.setItem(SPOTIFY_REGION_KEY, region);
+  updateSpotifyToggleUI(region);
+}
+
+function updateSpotifyToggleUI(region) {
+  if (!spotifyToggleButton) return;
+  const isUSA = region === "usa";
+  // Show the action the button will perform when clicked.
+  // If currently showing Global, button should offer to switch to USA, and vice versa.
+  spotifyToggleButton.textContent = isUSA ? "Switch to Top 50 — Global" : "Switch to Top 50 — USA";
+  spotifyToggleButton.setAttribute("aria-pressed", String(isUSA));
+  spotifyToggleButton.classList.toggle("is-active", isUSA);
 }
 
 function setCustomBackground(imageData) {
@@ -333,6 +362,17 @@ clearBackgroundButton.addEventListener("click", () => {
 openSpotifyPanel.addEventListener("click", () => {
   openPanel("music");
 });
+
+if (spotifyToggleButton) {
+  spotifyToggleButton.addEventListener("click", () => {
+    const currentRegion = localStorage.getItem(SPOTIFY_REGION_KEY) || "global";
+    if (currentRegion === "global") {
+      setSpotifyPlaylist(DEFAULT_SPOTIFY_USA, "usa");
+    } else {
+      setSpotifyPlaylist(DEFAULT_SPOTIFY_GLOBAL, "global");
+    }
+  });
+}
 
 prevMonthButton.addEventListener("click", previousMonth);
 nextMonthButton.addEventListener("click", nextMonth);

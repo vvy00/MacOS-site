@@ -596,8 +596,54 @@ body.has-custom-background .wallpaper--custom {
 }
 
 .section-heading {
-  max-width: 680px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 100%;
   margin-bottom: 1.2rem;
+}
+
+.section-heading__title {
+  display: flex;
+  flex-direction: column;
+}
+
+.music-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.music-controls .button {
+  height: 40px;
+  min-height: 40px;
+  padding: 0 0.9rem;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.music-controls .button.is-active {
+  background: #1a2432;
+  color: #fff9f2;
+}
+
+.music-controls .button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(26, 36, 50, 0.08);
+}
+
+.music-controls .button:active {
+  transform: none;
+}
+
+@media (max-width: 720px) {
+  .section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .section-heading h2 {
