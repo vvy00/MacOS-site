@@ -39,7 +39,7 @@ Features included:
   - Themes
     - Sunrise Blend
     - Aurora Glass
-    - Midnight Drift
+    - Midnight Drift (favorite)
     - Studio Sky
     - Forest Mist
     - Coastline
@@ -48,4 +48,4 @@ Features included:
   - Custom Upload
 - Spotlight Search
   - Shortcut
-    Crtl + K
+    -Crtl + K
