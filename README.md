@@ -48,4 +48,15 @@ Features included:
   - Custom Upload
 - Spotlight Search
   - Shortcut
-    -Crtl + K
+    - Crtl + K
+    - esc (to escape spotlight mode)
+
+## Future Improvments
+- Notes App
+- Weather Widget
+- Notifications
+- Dark/Light mode
+- To-do List
+
+## AI Usage
+- Used ChatGPT for debuggin and cleaning up code
