@@ -4,8 +4,8 @@
 
 This is a MacOS desktop display mock-up website. It was built with HTML, CSS, and JavaScript.
 
-## Features
-- Log-in sceen
+Features included:
+- Login sceen
 - Interactive System
 - Google search add-in
 - Spotify player
@@ -13,3 +13,39 @@ This is a MacOS desktop display mock-up website. It was built with HTML, CSS, an
 - Spotlight button
 - Theme/wallpaper upload
 - Draggable window
+
+## Features
+- Desktop
+  - Macos inpsired ui
+  - Glassmorphisim style
+  - Responsive layout
+  - Window controls (close, mimimize, expand, restore)
+  - Draggable window
+- Login Screen
+  - Live clock & date
+  - No password login
+- Google Search
+  - Built in search bar
+  - Opens in a new tab
+  - Prompts on the side
+- Spotfiy
+  - Embedded playlists
+  - Choose between: Top 50 Global or Top 50 USA
+- Calendar
+  - Dynamic monthly calendar
+  - Left & Right arrows to navigate (<>)
+  - Shows current day
+- Backgrounds
+  - Themes
+    - Sunrise Blend
+    - Aurora Glass
+    - Midnight Drift
+    - Studio Sky
+    - Forest Mist
+    - Coastline
+    - Petal Bloom
+    - Twilight Bloom
+  - Custom Upload
+- Spotlight Search
+  - Shortcut
+    Crtl + K
