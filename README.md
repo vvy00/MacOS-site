@@ -29,12 +29,12 @@ Features included:
   - Opens in a new tab
   - Prompts on the side
 - Spotfiy
-  - Embedded playlists
+  - Uses embedded playlists
   - Choose/Pick between: Top 50 Global or Top 50 USA
 - Calendar
   - Dynamic monthly calendar
   - Left & Right arrows to navigate (<- ->)
-  - Shows current day
+  - Shows the current day
 - Backgrounds
   - Themes Available
     - Sunrise Blend
