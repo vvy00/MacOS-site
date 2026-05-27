@@ -30,13 +30,13 @@ Features included:
   - Prompts on the side
 - Spotfiy
   - Embedded playlists
-  - Choose between: Top 50 Global or Top 50 USA
+  - Choose/Pick between: Top 50 Global or Top 50 USA
 - Calendar
   - Dynamic monthly calendar
   - Left & Right arrows to navigate (<- ->)
   - Shows current day
 - Backgrounds
-  - Themes
+  - Themes Available
     - Sunrise Blend
     - Aurora Glass
     - Midnight Drift (favorite)
@@ -46,12 +46,12 @@ Features included:
     - Petal Bloom
     - Twilight Bloom
   - Custom Upload
-- Spotlight Search
-  - Shortcut
+- The Spotlight Search
+  - Shortcuts
     - Crtl + K
     - esc (to escape spotlight mode)
 
-## Future Improvments
+## Some Future Improvments
 - Notes App
 - Weather Widget
 - Notifications
@@ -59,4 +59,4 @@ Features included:
 - To-do List
 
 ## AI Usage
-- Used ChatGPT for debuggin and cleaning up code
+- Used ChatGPT for debugging and cleaning up code
