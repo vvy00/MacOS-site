@@ -1,4 +1,4 @@
-# MacOS Site 🍎
+# MacOS Site
 
 <img width="1279" height="691" alt="mac" src="https://github.com/user-attachments/assets/b8ee43b9-8b5c-4b5c-b684-7d28d8a47f83" />
 
